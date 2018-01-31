@@ -1,6 +1,5 @@
 require 'csv'
 require_relative '../models/user.rb'
-require 'pry-byebug'
 
 class UserBaseRepository
   attr_reader :elements
@@ -16,8 +15,8 @@ class UserBaseRepository
 
   def save_csv
     CSV.open(@output_csv_file, 'w') do |csv|
-      csv << @elements.first.class.headers
-      @elements.each do |element|
+      csv << @element.first.class.headers
+      @element.each do |element|
         csv << element.csv_row
       end
     end
