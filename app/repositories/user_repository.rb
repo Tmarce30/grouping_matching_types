@@ -1,5 +1,5 @@
 require 'csv'
-require_relative 'user.rb'
+require_relative '../models/user.rb'
 
 class UserRepository
   def initialize(csv_file)
@@ -39,8 +39,8 @@ class UserRepository
   end
 end
 
-repo_1 = UserRepository.new('input1.csv')
-repo_2 = UserRepository.new('input2.csv')
+repo_1 = UserRepository.new('data/input1.csv')
+repo_2 = UserRepository.new('data/input2.csv')
 
 p repo_2
 
