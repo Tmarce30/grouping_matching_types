@@ -21,20 +21,20 @@ class UserRepository
     @element = {}
     @element[:first_name] = row[:firstname]
     @element[:last_name] = row[:lastname]
-    handle_multiple_headers(row, :email1)
+    email_and_phone(row, :email || :phone)
     @element[:zip] = row[:zip]
     User.new(@element)
   end
 
-  def handle_multiple_headers(row, header)
+  def email_and_phone(row, header)
     if row.headers.include?(header)
+      @element[:email_1] = row[:email]
+      @element[:phone_1] = row[:phone]
+    else
       @element[:email_1] = row[:email1]
       @element[:email_2] = row[:email2]
       @element[:phone_1] = row[:phone1]
       @element[:phone_2] = row[:phone2]
-    else
-      @element[:email_1] = row[:email]
-      @element[:phone_1] = row[:phone]
     end
   end
 end
