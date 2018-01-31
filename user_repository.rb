@@ -18,18 +18,29 @@ class UserRepository
   end
 
   def build_element(row)
-    element = {}
-    element[:first_name] = row[:firstname]
-    element[:last_name] = row[:lastname]
-    element[:phone_1] = row[:phone1]
-    element[:phone_2] = row[:phone2]
-    element[:email_1] = row[:email1]
-    element[:email_2] = row[:email2]
-    element[:zip] = row[:zip]
-    User.new(element)
+    @element = {}
+    @element[:first_name] = row[:firstname]
+    @element[:last_name] = row[:lastname]
+    handle_multiple_headers(row, :email1)
+    @element[:zip] = row[:zip]
+    User.new(@element)
+  end
+
+  def handle_multiple_headers(row, header)
+    if row.headers.include?(header)
+      @element[:email_1] = row[:email1]
+      @element[:email_2] = row[:email2]
+      @element[:phone_1] = row[:phone1]
+      @element[:phone_2] = row[:phone2]
+    else
+      @element[:email_1] = row[:email]
+      @element[:phone_1] = row[:phone]
+    end
   end
 end
 
-repo = UserRepository.new('input2.csv')
+repo_1 = UserRepository.new('input1.csv')
+repo_2 = UserRepository.new('input2.csv')
 
-p repo
+p repo_2
+
