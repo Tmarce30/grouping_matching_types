@@ -10,4 +10,12 @@ class User
     @email_2 = attributes[:email_2]
     @zip = attributes[:zip]
   end
+
+  def self.headers
+    %w(first_name last_name phone_1 phone_2 email_1 email_2 zip)
+  end
+
+  def csv_row
+    [@first_name, @last_name, @phone_1, @phone_2, @email_1, @email_2, @zip]
+  end
 end

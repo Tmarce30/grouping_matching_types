@@ -1,18 +1,31 @@
 require 'csv'
 require_relative '../models/user.rb'
+require 'pry-byebug'
 
-class UserRepository
-  def initialize(csv_file)
+class UserBaseRepository
+  attr_reader :elements
+
+  def initialize(loaded_csv_file, output_csv_file)
     @elements = []
-    @csv_file = csv_file
-    load_csv if File.exist?(@csv_file)
+    @loaded_csv_file = loaded_csv_file
+    @output_csv_file = output_csv_file
+    load_csv if File.exist?(@loaded_csv_file)
   end
 
   private
 
+  def save_csv
+    CSV.open(@output_csv_file, 'w') do |csv|
+      csv << @elements.first.class.headers
+      @elements.each do |element|
+        csv << element.csv_row
+      end
+    end
+  end
+
   def load_csv
     csv_options = { headers: :first_row, header_converters: :symbol }
-    CSV.foreach(@csv_file, csv_options) do |row|
+    CSV.foreach(@loaded_csv_file, csv_options) do |row|
       @elements << build_element(row)
     end
   end
@@ -38,9 +51,4 @@ class UserRepository
     end
   end
 end
-
-repo_1 = UserRepository.new('data/input1.csv')
-repo_2 = UserRepository.new('data/input2.csv')
-
-p repo_2
 
