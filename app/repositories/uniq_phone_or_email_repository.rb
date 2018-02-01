@@ -1,7 +1,15 @@
 require_relative 'user_base_repository.rb'
 
 class UniqPhoneOrEmailRepository < UserBaseRepository
-  def all
+  def initialize(loaded_csv_file, output_csv_file)
+    super(loaded_csv_file, output_csv_file)
+
+    uniq_phone_or_email
+  end
+
+  private
+
+  def uniq_phone_or_email
     users = []
     existing_data = []
     @elements.each do |element|
@@ -16,11 +24,3 @@ class UniqPhoneOrEmailRepository < UserBaseRepository
   end
 end
 
-
-
-repo_1 = UniqPhoneOrEmailRepository.new('data/input1.csv', 'data/same_email_address_or_phone_number.csv')
-repo_2 = UniqPhoneOrEmailRepository.new('data/input2.csv', 'data/same_email_address_or_phone_number.csv')
-repo_3 = UniqPhoneOrEmailRepository.new('data/input3.csv', 'data/same_email_address_or_phone_number.csv')
-
-repo_1.all
-# phone_repo_2.uniq_phone

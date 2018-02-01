@@ -7,6 +7,8 @@ class UniqPhoneRepository < UserBaseRepository
     uniq_phones
   end
 
+  private
+
   def uniq_phones
     users = []
     existing_phone = []
@@ -22,11 +24,3 @@ class UniqPhoneRepository < UserBaseRepository
   end
 end
 
-
-
-phone_repo_1 = UniqPhoneRepository.new('data/input1.csv', 'data/same_phone_number.csv')
-phone_repo_2 = UniqPhoneRepository.new('data/input2.csv', 'data/same_phone_number.csv')
-phone_repo_3 = UniqPhoneRepository.new('data/input3.csv', 'data/same_phone_number.csv')
-
-phone_repo_3.uniq_phone
-# phone_repo_2.uniq_phone
