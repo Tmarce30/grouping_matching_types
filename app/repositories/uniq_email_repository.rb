@@ -1,7 +1,15 @@
 require_relative 'user_base_repository.rb'
 
 class UniqEmailRepository < UserBaseRepository
-  def all
+  def initialize(loaded_csv_file, output_csv_file)
+    super(loaded_csv_file, output_csv_file)
+
+    uniq_email
+  end
+
+  private
+
+  def uniq_email
     users = []
     existing_email = []
     @elements.each do |element|
@@ -15,9 +23,3 @@ class UniqEmailRepository < UserBaseRepository
     save_csv
   end
 end
-
-email_repo_1 = UniqEmailRepository.new('data/input1.csv', 'data/same_email_address.csv')
-email_repo_2 = UniqEmailRepository.new('data/input2.csv', 'data/same_email_address.csv')
-email_repo_3 = UniqEmailRepository.new('data/input3.csv', 'data/same_email_address.csv')
-
-email_repo_3.uniq_email
