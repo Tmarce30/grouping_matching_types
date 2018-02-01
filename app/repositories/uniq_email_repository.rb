@@ -4,12 +4,12 @@ class UniqEmailRepository < UserBaseRepository
   def initialize(loaded_csv_file, output_csv_file)
     super(loaded_csv_file, output_csv_file)
 
-    uniq_email
+    uniq_emails
   end
 
   private
 
-  def uniq_email
+  def uniq_emails
     users = []
     existing_email = []
     @elements.each do |element|
