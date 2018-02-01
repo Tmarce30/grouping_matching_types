@@ -15,15 +15,3 @@ class UniqEmailRepository < UserBaseRepository
   end
 end
 
-
-
-email_repo_1 = UniqEmailRepository.new('data/input1.csv', 'data/same_email_address.csv')
-email_repo_2 = UniqEmailRepository.new('data/input2.csv', 'data/same_email_address.csv')
-email_repo_3 = UniqEmailRepository.new('data/input3.csv', 'data/same_email_address.csv')
-
-phone_repo_1 = UniqEmailRepository.new('data/input1.csv', 'data/same_phone_number.csv')
-phone_repo_2 = UniqEmailRepository.new('data/input2.csv', 'data/same_phone_number.csv')
-phone_repo_3 = UniqEmailRepository.new('data/input3.csv', 'data/same_phone_number.csv')
-
-email_repo_1.uniq_email
-# phone_repo_2.uniq_phone

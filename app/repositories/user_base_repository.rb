@@ -13,10 +13,10 @@ class UserBaseRepository
 
   private
 
-  def save_csv
+  def save_csv(array)
     CSV.open(@output_csv_file, 'w') do |csv|
-      csv << @element.first.class.headers
-      @element.each do |element|
+      csv << array.first.class.headers
+      array.each do |element|
         csv << element.csv_row
       end
     end
