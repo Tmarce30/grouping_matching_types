@@ -1,7 +1,7 @@
 require_relative 'user_base_repository.rb'
 
 class UniqEmailRepository < UserBaseRepository
-  def uniq_email
+  def all
     users = []
     existing_email = []
     @elements.each do |element|
